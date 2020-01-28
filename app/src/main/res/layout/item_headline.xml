@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="@dimen/text_margin">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/headlineImageCard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/text_margin"
+        app:cardCornerRadius="@dimen/small"
+       app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.android.volley.toolbox.NetworkImageView
+            android:id="@+id/headlineImage"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+
+            android:focusable="true"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/ic_launcher"
+            app:layout_constraintEnd_toEndOf="parent" />
+    </com.google.android.material.card.MaterialCardView>
+
+    <me.jabez.news.app.view.HeaderView
+        android:id="@+id/itemHeader"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/medium"
+        android:layout_marginEnd="@dimen/text_margin"
+        app:layout_constraintStart_toEndOf="@id/headlineImageCard"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/text_margin"
+        android:background="@color/grey"
+        app:layout_constraintTop_toBottomOf="@+id/itemHeader" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

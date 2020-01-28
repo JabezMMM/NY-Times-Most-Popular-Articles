@@ -5,15 +5,15 @@ import android.os.AsyncTask
 import android.util.Log
 import com.android.volley.VolleyError
 import com.google.gson.Gson
+import me.jabez.news.app.BuildConfig
 import org.json.JSONObject
 import me.jabez.news.app.util.MySingleton
 import me.jabez.news.app.util.VolleyListener
 
+private const val TAG = "TheNewsAPI"
 abstract class TheNewsAPI : AsyncTask<Context, Void, Void>(), VolleyListener {
     companion object {
         private const val BASIC_URL = "https://api.nytimes.com/svc/mostpopular/v2/"
-        private const val API_KEY = "dOlCynR3l03t14QVFpb8y0ruFhhSQkSN"
-        private const val TAG = "TheNewsAPI"
     }
 
     override fun doInBackground(vararg params: Context): Void? {
@@ -22,7 +22,7 @@ abstract class TheNewsAPI : AsyncTask<Context, Void, Void>(), VolleyListener {
     }
 
     private fun getRequestUrl(): String {
-        return "${BASIC_URL}${getApiName()}${getSection()}/${getPeriod()}.json?api-key=${API_KEY}"
+        return "${BASIC_URL}${getApiName()}${getSection()}/${getPeriod()}.json?api-key=${BuildConfig.API_KEY}"
     }
 
     override fun onResponse(jsonObject: JSONObject) {

@@ -8,7 +8,7 @@ The codebase focuses 👓 on following key things:
 - Code to be generic and simple
 - Leverage today's best coding practices
 
-<img alt="NY Times Most Popular Articles" height="450px" src="https://raw.githubusercontent.com/AkshayChordiya/News/master/art/screen.png" />
+<img alt="NY Times Most Popular Articles" height="450px" src="https://github.com/JabezMMM/NY-Times-Most-Popular-Articles/blob/master/art/screen.png" />
 
 # Development Setup
 You will require latest version of Android Studio 3.0 (or newer) to be able to build the app

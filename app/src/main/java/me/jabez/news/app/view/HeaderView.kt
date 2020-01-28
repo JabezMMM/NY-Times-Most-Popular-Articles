@@ -21,7 +21,6 @@ class HeaderView @JvmOverloads constructor(context: Context, attrs: AttributeSet
     fun setValues(article: Results) {
         holder.headingTitle.text = article.title
         holder.byAuthor.text = article.byline
-        //holder.publishedAt.text = DateFormatter.getTime(article.published_date!!)
         holder.publishedAt.text = article.published_date
     }
 

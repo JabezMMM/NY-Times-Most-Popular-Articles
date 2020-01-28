@@ -3,11 +3,14 @@ package me.jabez.news.app.view.adapter
 import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
+import me.jabez.news.app.DetailsControllerListener
+import me.jabez.news.app.MainActivity
+import me.jabez.news.app.controller.DetailsController
 import me.jabez.news.app.model.Results
 import me.jabez.news.app.view.HeadlineItemView
 
-open class NewsHeadingAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    protected var list: ArrayList<Any> = ArrayList()
+open class NewsHeadingAdapter(private val listener: DetailsControllerListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    private var list: ArrayList<Any> = ArrayList()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder = ListViewHolder(HeadlineItemView(parent.context))
 
     override fun getItemCount(): Int {
@@ -17,8 +20,9 @@ open class NewsHeadingAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>(
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val item = list[position]
         holder as ListViewHolder
+
         when (item) {
-            is Results -> with(holder.mView as HeadlineItemView) { setHeadlineValues(item) }
+            is Results -> with(holder.mView as HeadlineItemView) { setHeadlineValues(item, listener) }
         }
     }
 

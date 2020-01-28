@@ -1,15 +1,22 @@
 package me.jabez.news.app
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
-import me.jabez.news.app.api.MostViewedAPI
+import me.jabez.news.app.model.MostViewedResponse
 import me.jabez.news.app.model.Results
+import me.jabez.news.app.api.Network
 import me.jabez.news.app.view.adapter.NewsHeadingAdapter
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import java.io.IOException
+
 
 class MainActivity : AppCompatActivity() {
     private lateinit var mAdapter: NewsHeadingAdapter
@@ -37,13 +44,27 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
-    private fun fetchFeed(days: Int) {
-        //appBar.replaceMenu(R.menu.appBar_menu)
-        GetTopHeadlines(days).execute(this)
+    private val callback = object : Callback<MostViewedResponse> {
+        override fun onResponse(call: Call<MostViewedResponse>, response: Response<MostViewedResponse>) {
+            isLoading(false)
+            // Adapter values cleared & UI refreshed while fetching headlines
+            mAdapter.clearList()
+            loadHeadlines(ArrayList<Results>(response.body()!!.results))
+        }
 
-        // Adapter values cleared & UI refreshed while fetching headlines
-        mAdapter.clearList()
-        mAdapter.notifyDataSetChanged()
+        override fun onFailure(call: Call<MostViewedResponse>, t: Throwable) {
+            isLoading(false)
+            Toast.makeText(this@MainActivity, if (t is IOException) {
+                "No Internet Connection!"
+            } else {
+                "Something went wrong...Please try later!"
+            }, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun fetchFeed(period: Int) {
+        val call: Call<MostViewedResponse> = Network.getMostPopularService().getArticles(period)
+        call.enqueue(callback)
         isLoading(true)
         headlineList.scrollTo(0, 0)
         appBar.setExpanded(true, true)
@@ -59,13 +80,10 @@ class MainActivity : AppCompatActivity() {
         loadingView.visibility = if (visibility) View.VISIBLE else View.GONE
     }
 
-    /* API calls */
-    private inner class GetTopHeadlines(days: Int) : MostViewedAPI(days) {
-        override fun onListFetched(list: ArrayList<Results>) {
-            mAdapter.appendToList(list)
-            mAdapter.notifyDataSetChanged()
-            isLoading(false)
-        }
+    private fun loadHeadlines(list: ArrayList<Results>) {
+        mAdapter.appendToList(list)
+        mAdapter.notifyDataSetChanged()
+        isLoading(false)
     }
 }
 

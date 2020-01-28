@@ -1,7 +1,7 @@
 # NY-Times-Most-Popular-Articles
 This is a simple news app️ which uses [NY Times API](https://api.nytimes.com) to fetch most popular news headlines from the API.
 
-The codebase focuses 👓 on following key things:
+The codebase focuses on following key things:
 - Object Oriented Programming approach
 - Good UI approach e.g. MVC, etc.
 - Unit test and code coverage
@@ -22,6 +22,17 @@ You'll need to provide API key to fetch the news. Currently the news is fetched 
     NEWS_API_KEY = "<YOUR_API_KEY>"
 ```
 - Build the app
+
+## Libraries and tools
+- Kotlin first
+- Retrofit
+- Volley
+
+## Architecture
+The app uses MVC [Model-View-Controller] architecture to have a unidirectional flow of data, separation of concern, testability, and a lot more.
+
+## Unit testing
+- JUnit
 
 ## License
 The MIT License (MIT)

@@ -1,8 +1,17 @@
 # NY-Times-Most-Popular-Articles
+This is a simple news app️ which uses [NY Times API](https://api.nytimes.com) to fetch most popular news headlines from the API.
 
-This Android application will list the Most Popular articles from NY Times.
+The codebase focuses 👓 on following key things:
+- Object Oriented Programming approach
+- Good UI approach e.g. MVC, etc.
+- Unit test and code coverage
+- Code to be generic and simple
+- Leverage today's best coding practices
 
-## Installation
+<img alt="NY Times Most Popular Articles" height="450px" src="https://raw.githubusercontent.com/AkshayChordiya/News/master/art/screen.png" />
+
+# Development Setup
+You will require latest version of Android Studio 3.0 (or newer) to be able to build the app
 
 ## API Key
 You'll need to provide API key to fetch the news. Currently the news is fetched from [NY Times](https://api.nytimes.com)
